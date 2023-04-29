@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Подробная информация об услуге</title>
+</head>
+<body>
+<h1>ЭТА МАИ УСЛУГИ ПАКУПАЙТИ ПАЖАЛУСТА</h1><hr>
+<b>Название услуги:</b> ${action.title}<br>
+<b>Описание услуги:</b> ${action.description}<br>
+<b>Цена услуги:</b> ${action.price}<br>
+<hr>
+<h3>Создать новый товар</h3>
+<form action="/action/delete/${action.id}" method="post">
+    <input type="submit" value="Удалить услугу">
+</form>
+</body>
+</html>
