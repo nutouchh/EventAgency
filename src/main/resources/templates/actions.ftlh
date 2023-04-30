@@ -7,19 +7,34 @@
 <body>
 <h1>ЭТА МАИ УСЛУГИ ПАКУПАЙТИ ПАЖАЛУСТА</h1><hr>
 <h3>вот они</h3>
+
+<#-- поиск услуги по названию -->
+<form action="/" method="get">
+    Поиск услуги: <input type="text" name="title"><br>
+    <input type="submit" value="Поиск">
+</form>
+
+<#-- показ всех услуг -->
 <#list actions as action>
     <div>
         <p>
             <b>${action.title}</b> ${action.price} | <a href = "/action/${action.id}">Подробнее...</a>
         </p>
     </div>
+    <#else>
+    <h3>Услуг нет, но вы держитесь</h3>
 </#list>
 <hr>
+
+<#-- создание нового товара -->
 <h3>Создать новый товар</h3>
-<form action="/action/create" method="post">
+<form action="/action/create" method="post" enctype="multipart/form-data">
     Название услуги: <input type="text" name="title"><br><br>
     Описание услуги: <input type="text" name="description"><br><br>
     Цена услуги: <input type="number" name="price"><br><br>
+    Фото услуги 1: <input type="file" name="file1"><br><br>
+    Фото услуги 2: <input type="file" name="file2"><br><br>
+    Фото услуги 3: <input type="file" name="file3"><br><br>
     <input type="submit" value="Добавить услугу">
 </form>
 </body>
