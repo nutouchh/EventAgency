@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,8 +21,9 @@ public class ActionController {
     private final ActionService actionService;
 
     @GetMapping("/")
-    public String actions(@RequestParam(name = "title", required = false) String title, Model model) {
+    public String actions(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
         model.addAttribute("actions", actionService.getActions(title));
+        model.addAttribute("user", actionService.getUserByPrincipal(principal));
         return "actions";
     }
 
@@ -35,8 +37,8 @@ public class ActionController {
 
     @PostMapping("/action/create")
     public String createAction(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
-                               @RequestParam("file3") MultipartFile file3, Action action) throws IOException {
-        actionService.saveAction(action, file1, file2, file3);
+                               @RequestParam("file3") MultipartFile file3, Action action, Principal principal) throws IOException {
+        actionService.saveAction(principal, action, file1, file2, file3);
         return "redirect:/";
     }
 

@@ -2,7 +2,9 @@ package com.nutouchh.EventAgency.services;
 
 import com.nutouchh.EventAgency.models.Action;
 import com.nutouchh.EventAgency.models.Image;
+import com.nutouchh.EventAgency.models.User;
 import com.nutouchh.EventAgency.repositories.ActionRepository;
+import com.nutouchh.EventAgency.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ActionService {
     private final ActionRepository actionRepository;
+    private final UserRepository userRepository;
 
 //    public List<Action> getAllActions() {
 //        log.info("Get all actions");
@@ -37,7 +41,8 @@ public class ActionService {
         return actionRepository.findAll();
     }
 
-    public void saveAction(Action action, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
+    public void saveAction(Principal principal, Action action, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
+//        action.setUser(getUserByPrincipal(principal));
         Image image1;
         Image image2;
         Image image3;
@@ -67,6 +72,11 @@ public class ActionService {
         Action actionFromDb = actionRepository.save(action);
         actionFromDb.setPreviewImageId(actionFromDb.getImages().get(0).getId());
         actionRepository.save(action);
+    }
+
+    public Object getUserByPrincipal(Principal principal) {
+        if (principal == null) return new User();
+        return userRepository.findByEmail(principal.getName());
     }
 
     private Image toImageEntity(MultipartFile file) throws IOException {

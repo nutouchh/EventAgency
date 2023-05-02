@@ -11,6 +11,7 @@
 <#-- фоточки выводит -->
 <#list images as img>
     <img src="/images/${img.id}" height="150px"/><br><br>
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
 </#list>
 
 
@@ -19,6 +20,7 @@
 <b>Цена услуги:</b> ${action.price}<br>
 <hr>
 <form action="/action/delete/${action.id}" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
     <input type="submit" value="Удалить услугу">
 </form>
 </body>
