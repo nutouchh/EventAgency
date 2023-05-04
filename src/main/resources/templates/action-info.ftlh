@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Подробная информация об услуге</title>
+    <title>Услуга: ${action.title}</title>
 </head>
 <body>
-<h1>ЭТА МАИ УСЛУГИ ПАКУПАЙТИ ПАЖАЛУСТА</h1><hr>
-
+<h1>Услуга: ${action.title}</h1>
+<hr>
 
 <#-- фоточки выводит -->
 <#--<#list image as img>-->
-    <img src="/images/${image.id}" height="150px"/><br><br>
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
+<img src="/images/${image.id}" height="150px"/><br><br>
+<input type="hidden" name="_csrf" value="${_csrf.token}">
 <#--</#list>-->
 
 
@@ -19,10 +19,16 @@
 <b>Описание услуги:</b> ${action.description}<br>
 <b>Цена услуги:</b> ${action.price}<br>
 <b>Категория:</b> ${action.event.title}<br>
-<hr>
-<form action="/action/delete/${action.id}" method="post">
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <input type="submit" value="Удалить услугу">
-</form>
+
+<#if user.email??>
+    <#if user.isAdmin()>
+        <hr>
+        <form action="/action/delete/${action.id}" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <input type="submit" value="Удалить услугу">
+        </form>
+    </#if>
+</#if>
+
 </body>
 </html>

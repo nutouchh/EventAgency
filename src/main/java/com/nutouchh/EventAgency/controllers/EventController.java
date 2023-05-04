@@ -1,8 +1,6 @@
 package com.nutouchh.EventAgency.controllers;
 
-import com.nutouchh.EventAgency.models.Action;
 import com.nutouchh.EventAgency.models.Event;
-import com.nutouchh.EventAgency.services.ActionService;
 import com.nutouchh.EventAgency.services.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,7 +20,7 @@ public class EventController {
 
     private final EventService eventService;
 
-    @GetMapping("/event")
+    @GetMapping("/")
     public String events(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
         model.addAttribute("events", eventService.getEvents(title));
         model.addAttribute("user", eventService.getUserByPrincipal(principal));
@@ -30,26 +28,32 @@ public class EventController {
     }
 
     @GetMapping("/event/{id}")
-    public String eventInfo(@PathVariable Long id, Model model) {
+    public String eventInfo(@PathVariable Long id, Model model, Principal principal) {
         Event event = eventService.getEventById(id);
         model.addAttribute("event", event);
         model.addAttribute("image", event.getImage());
-        return "event-info";
+        model.addAttribute("actions", event.getActions());
+        model.addAttribute("user", eventService.getUserByPrincipal(principal));
+        return "event-actions";
     }
-
-//    @PostMapping("/event/create")
-//    public String createEvent(Event event, Principal principal) throws IOException {
-//        eventService.saveEvent(principal, event);
-//        return "redirect:/";
-//    }
 
     @PostMapping("/event/create")
     public String createEvent(@RequestParam("file") MultipartFile file, Event event, Principal principal) throws IOException {
         eventService.saveEvent(principal, event, file);
-        return "redirect:/";
+        return "redirect:/create/event/success";
     }
 
+    @GetMapping("/create/event")
+    public String createActionPage(Model model, Principal principal) {
+        model.addAttribute("user", eventService.getUserByPrincipal(principal));
+        return "create-event";
+    }
 
+    @GetMapping("/create/event/success")
+    public String success(Model model, Principal principal) {
+        model.addAttribute("user", eventService.getUserByPrincipal(principal));
+        return "create-success";
+    }
 
     @PostMapping("/event/delete/{id}")
     public String deleteEvent(@PathVariable Long id) {
