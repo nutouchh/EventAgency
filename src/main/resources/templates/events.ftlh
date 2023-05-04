@@ -28,10 +28,10 @@
 </form>
 
 <#-- показ всех услуг -->
-<#list actions as action>
+<#list events as event>
     <div>
         <p>
-            <b>${action.title}</b> ${action.price} | <a href="/action/${action.id}">Подробнее...</a>
+            <b>${event.title}</b> | <a href="/event/${event.id}">Подробнее...</a>
         </p>
     </div>
 <#else>
@@ -42,12 +42,11 @@
     <#if user.isAdmin()>
         <hr>
     <#-- создание нового товара -->
-        <h3>Создать новый товар</h3>
-        <form action="/action/create" method="post" enctype="multipart/form-data">
+        <h3>Создать новый event</h3>
+        <form action="/event/create" method="post" enctype="multipart/form-data">
             Название услуги: <input required type="text" name="title"><br><br>
             Описание услуги: <input required type="text" name="description"><br><br>
-            Цена услуги: <input required type="number" name="price"><br><br>
-            Категория мероприятия: <input required type="text" name="eventTitle"><br><br>
+<#--            Цена услуги: <input required type="number" name="price"><br><br>-->
             Фото услуги 1: <input required type="file" name="file1"><br><br>
             Фото услуги 2: <input type="file" name="file2"><br><br>
             Фото услуги 3: <input type="file" name="file3"><br><br>

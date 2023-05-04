@@ -1,9 +1,11 @@
 package com.nutouchh.EventAgency.services;
 
 import com.nutouchh.EventAgency.models.Action;
+import com.nutouchh.EventAgency.models.Event;
 import com.nutouchh.EventAgency.models.Image;
 import com.nutouchh.EventAgency.models.User;
 import com.nutouchh.EventAgency.repositories.ActionRepository;
+import com.nutouchh.EventAgency.repositories.EventRepository;
 import com.nutouchh.EventAgency.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ActionService {
     private final ActionRepository actionRepository;
+    private final EventRepository eventRepository;
     private final UserRepository userRepository;
 
 //    public List<Action> getAllActions() {
@@ -41,7 +44,7 @@ public class ActionService {
         return actionRepository.findAll();
     }
 
-    public void saveAction(Principal principal, Action action, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
+    public void saveAction(Principal principal, Action action, MultipartFile file1, MultipartFile file2, MultipartFile file3, String eventTitle) throws IOException {
 //        action.setUser(getUserByPrincipal(principal));
         Image image1;
         Image image2;
@@ -71,8 +74,26 @@ public class ActionService {
         log.info("Saving new action {}", action.getTitle());
         Action actionFromDb = actionRepository.save(action);
         actionFromDb.setPreviewImageId(actionFromDb.getImages().get(0).getId());
-        actionRepository.save(action);
+        if (eventTitle != null){
+            eventRepository.findEventByTitle(eventTitle).forEach(event -> event.addActionToEvent(action));
+//          Long eventId = 47L;
+//            for (Event ev : eventsByTitle) {
+//                if (ev.getTitle() == eventTitle){
+//                    System.out.println("Равенство нашлось");
+//                    eventId = ev.getId();
+//                }
+//            }
+//            eventRepository.findById(eventId).ifPresent(event -> event.addActionToEvent(action));
+
+            actionRepository.save(action);
+        }
+
     }
+
+//    public void deleteEntity(String name, String address) {
+//        List<Market> toDelete = marketRepository.findByNameAndAddress(name, address);
+//        marketRepository.deleteAll(toDelete);
+//    }
 
     public Object getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();

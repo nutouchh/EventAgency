@@ -21,23 +21,29 @@ public class Action {
     @Column(name = "id")
     private Long id;
     @Column(name = "title")
-    private String title; //название услуги - действия
+    private String title;
     @Column(name = "description", columnDefinition = "text")
-    private String description; //описание услуги
+    private String description;
     @Column(name = "price")
-    private int price; //цена услуги
+    private int price;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "action")
     private List<Image> images = new ArrayList<>();
     private Long previewImageId;
-    private LocalDateTime dateOfCreated;
-    @PrePersist
-    private void init() {
-        dateOfCreated = LocalDateTime.now();
-    }
+//    private LocalDateTime dateOfCreated;
+//    @PrePersist
+//    private void init() {
+//        dateOfCreated = LocalDateTime.now();
+//    }
 
     public void addImageToAction(Image image){
         image.setAction(this);
         images.add(image);
     }
+
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH})
+//    @JoinColumn(name = "product_id")
+    private Event event;
 }

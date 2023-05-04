@@ -1,7 +1,9 @@
 package com.nutouchh.EventAgency.controllers;
 
 import com.nutouchh.EventAgency.models.Action;
+import com.nutouchh.EventAgency.models.Event;
 import com.nutouchh.EventAgency.services.ActionService;
+import com.nutouchh.EventAgency.services.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +39,8 @@ public class ActionController {
 
     @PostMapping("/action/create")
     public String createAction(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
-                               @RequestParam("file3") MultipartFile file3, Action action, Principal principal) throws IOException {
-        actionService.saveAction(principal, action, file1, file2, file3);
+                               @RequestParam("file3") MultipartFile file3, Action action, Principal principal, String eventTitle) throws IOException {
+        actionService.saveAction(principal, action, file1, file2, file3, eventTitle);
         return "redirect:/";
     }
 

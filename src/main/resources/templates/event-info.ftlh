@@ -15,12 +15,11 @@
 </#list>
 
 
-<b>Название услуги:</b> ${action.title}<br>
-<b>Описание услуги:</b> ${action.description}<br>
-<b>Цена услуги:</b> ${action.price}<br>
-<b>Категория:</b> ${action.event.title}<br>
+<b>Название услуги:</b> ${event.title}<br>
+<b>Описание услуги:</b> ${event.description}<br>
+<#--<b>Цена услуги:</b> ${event.price}<br>-->
 <hr>
-<form action="/action/delete/${action.id}" method="post">
+<form action="/event/delete/${event.id}" method="post">
     <input type="hidden" name="_csrf" value="${_csrf.token}">
     <input type="submit" value="Удалить услугу">
 </form>

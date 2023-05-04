@@ -25,11 +25,11 @@ public class User implements UserDetails {
     private String numberPhone;
     @Column(name = "name")
     private String name;
-    @Column(name = "active")
-    private boolean active;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "image_id")
-    private Image avatar;
+//    @Column(name = "active")
+//    private boolean active;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "image_id")
+//    private Image avatar;
     @Column(name = "password", length = 1000)
     private String password;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -38,12 +38,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
     private LocalDateTime dateOfCreated;
-
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();
     }
-
     public boolean isAdmin() {
         return roles.contains(Role.ROLE_ADMIN);
     }
@@ -51,17 +49,14 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
     }
-
     @Override
     public String getUsername() {
         return email;
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
@@ -78,6 +73,11 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return true;
     }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return active;
+//    }
 }
