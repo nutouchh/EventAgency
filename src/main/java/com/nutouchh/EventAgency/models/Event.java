@@ -29,9 +29,9 @@ public class Event {
 //    @Column(name = "price")
 //    private int price;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "event")
-    private List<Image> images = new ArrayList<>();
-    private Long previewImageId;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "event")
+    private Image image;
+//    private Long previewImageId;
     private LocalDateTime dateOfCreated;
     @PrePersist
     private void init() {
@@ -40,7 +40,7 @@ public class Event {
 
     public void addImageToEvent(Image image){
         image.setEvent(this);
-        images.add(image);
+        this.image=image;
     }
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,

@@ -33,7 +33,7 @@ public class EventController {
     public String eventInfo(@PathVariable Long id, Model model) {
         Event event = eventService.getEventById(id);
         model.addAttribute("event", event);
-        model.addAttribute("images", event.getImages());
+        model.addAttribute("image", event.getImage());
         return "event-info";
     }
 
@@ -44,9 +44,8 @@ public class EventController {
 //    }
 
     @PostMapping("/event/create")
-    public String createEvent(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
-                              @RequestParam("file3") MultipartFile file3, Event event, Principal principal) throws IOException {
-        eventService.saveEvent(principal, event, file1, file2, file3);
+    public String createEvent(@RequestParam("file") MultipartFile file, Event event, Principal principal) throws IOException {
+        eventService.saveEvent(principal, event, file);
         return "redirect:/";
     }
 

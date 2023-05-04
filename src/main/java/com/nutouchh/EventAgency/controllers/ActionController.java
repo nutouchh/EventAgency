@@ -33,14 +33,13 @@ public class ActionController {
     public String actionInfo(@PathVariable Long id, Model model) {
         Action action = actionService.getActionById(id);
         model.addAttribute("action", action);
-        model.addAttribute("images", action.getImages());
+        model.addAttribute("image", action.getImage());
         return "action-info";
     }
 
     @PostMapping("/action/create")
-    public String createAction(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
-                               @RequestParam("file3") MultipartFile file3, Action action, Principal principal, String eventTitle) throws IOException {
-        actionService.saveAction(principal, action, file1, file2, file3, eventTitle);
+    public String createAction(@RequestParam("file") MultipartFile file, Action action, Principal principal, String eventTitle) throws IOException {
+        actionService.saveAction(principal, action, file, eventTitle);
         return "redirect:/";
     }
 

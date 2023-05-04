@@ -44,15 +44,12 @@ public class ActionService {
         return actionRepository.findAll();
     }
 
-    public void saveAction(Principal principal, Action action, MultipartFile file1, MultipartFile file2, MultipartFile file3, String eventTitle) throws IOException {
+    public void saveAction(Principal principal, Action action, MultipartFile file, String eventTitle) throws IOException {
 //        action.setUser(getUserByPrincipal(principal));
-        Image image1;
-        Image image2;
-        Image image3;
-        if (file1.getSize() != 0) {
-            image1 = toImageEntity(file1);
-            image1.setPreviewImage(true);
-            action.addImageToAction(image1);
+        Image image;
+        if (file.getSize() != 0) {
+            image = toImageEntity(file);
+            action.addImageToAction(image);
 //            System.out.println(" ");
 //            System.out.println(" ");
 //            System.out.println(" ");
@@ -63,17 +60,17 @@ public class ActionService {
 //            System.out.println(" ");
 //            System.out.println(" ");
         }
-        if (file2.getSize() != 0) {
-            image2 = toImageEntity(file2);
-            action.addImageToAction(image2);
-        }
-        if (file3.getSize() != 0) {
-            image3 = toImageEntity(file3);
-            action.addImageToAction(image3);
-        }
+//        if (file2.getSize() != 0) {
+//            image2 = toImageEntity(file2);
+//            action.addImageToAction(image2);
+//        }
+//        if (file3.getSize() != 0) {
+//            image3 = toImageEntity(file3);
+//            action.addImageToAction(image3);
+//        }
         log.info("Saving new action {}", action.getTitle());
-        Action actionFromDb = actionRepository.save(action);
-        actionFromDb.setPreviewImageId(actionFromDb.getImages().get(0).getId());
+//        Action actionFromDb = actionRepository.save(action);
+//        actionFromDb.setPreviewImageId(actionFromDb.getImages().get(0).getId());
         if (eventTitle != null){
             eventRepository.findEventByTitle(eventTitle).forEach(event -> event.addActionToEvent(action));
 //          Long eventId = 47L;

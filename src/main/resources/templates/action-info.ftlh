@@ -9,10 +9,10 @@
 
 
 <#-- фоточки выводит -->
-<#list images as img>
-    <img src="/images/${img.id}" height="150px"/><br><br>
+<#--<#list image as img>-->
+    <img src="/images/${image.id}" height="150px"/><br><br>
     <input type="hidden" name="_csrf" value="${_csrf.token}">
-</#list>
+<#--</#list>-->
 
 
 <b>Название услуги:</b> ${action.title}<br>

@@ -48,9 +48,9 @@
             Описание услуги: <input required type="text" name="description"><br><br>
             Цена услуги: <input required type="number" name="price"><br><br>
             Категория мероприятия: <input required type="text" name="eventTitle"><br><br>
-            Фото услуги 1: <input required type="file" name="file1"><br><br>
-            Фото услуги 2: <input type="file" name="file2"><br><br>
-            Фото услуги 3: <input type="file" name="file3"><br><br>
+            Фото услуги: <input required type="file" name="file"><br><br>
+<#--            Фото услуги 2: <input type="file" name="file2"><br><br>-->
+<#--            Фото услуги 3: <input type="file" name="file3"><br><br>-->
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <input type="submit" value="Добавить услугу">
         </form>

@@ -49,27 +49,24 @@ public class EventService {
 //    }
 
 
-    public void saveEvent(Principal principal, Event event, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
+    public void saveEvent(Principal principal, Event event, MultipartFile file) throws IOException {
 //        event.setUser(getUserByPrincipal(principal));
-        Image image1;
-        Image image2;
-        Image image3;
-        if (file1.getSize() != 0) {
-            image1 = toImageEntity(file1);
-            image1.setPreviewImage(true);
-            event.addImageToEvent(image1);
+        Image image;
+        if (file.getSize() != 0) {
+            image = toImageEntity(file);
+            event.addImageToEvent(image);
         }
-        if (file2.getSize() != 0) {
-            image2 = toImageEntity(file2);
-            event.addImageToEvent(image2);
-        }
-        if (file3.getSize() != 0) {
-            image3 = toImageEntity(file3);
-            event.addImageToEvent(image3);
-        }
+//        if (file2.getSize() != 0) {
+//            image2 = toImageEntity(file2);
+//            event.addImageToEvent(image2);
+//        }
+//        if (file3.getSize() != 0) {
+//            image3 = toImageEntity(file3);
+//            event.addImageToEvent(image3);
+//        }
         log.info("Saving new event {}", event.getTitle());
-        Event eventFromDb = eventRepository.save(event);
-        eventFromDb.setPreviewImageId(eventFromDb.getImages().get(0).getId());
+//        Event eventFromDb = eventRepository.save(event);
+//        eventFromDb.setPreviewImageId(eventFromDb.getImages().get(0).getId());
         eventRepository.save(event);
     }
 
