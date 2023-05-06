@@ -1,67 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Event Agency</title>
-</head>
-<body>
-<h1>Event Agency</h1>
-<hr>
-<#if user.email??>
-    <h3>Имя пользователя: <i>${user.name}</i></h3>
-    <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type="submit" value="Выйти"/>
-    </form>
-    <#if user.isAdmin()>
-        <a href="/admin">Панель администратора</a>
-    </#if>
-<#else>
-    <a href="/login">Войти</a></h1>
-</#if>
-<hr>
-<h2>Агенство по организации мероприятий</h2>
-<h4>Наша компания предоставляет целый спкетр идей для Вашего праздника!</h4>
-<#-- поиск услуги по названию -->
-<form action="/" method="get">
-    Поиск услуги: <input type="text" name="title"><br>
-    <input type="submit" value="Поиск">
-</form>
-
-<#-- показ всех услуг -->
-<#list events as event>
-    <div>
-        <p>
-            <b>${event.title}</b> | <a href="/event/${event.id}">Подробнее...</a>
-        </p>
+<#import "blocks/template.ftlh" as t>
+<@t.template user>
+    <div style="text-align: center">
+        <h1>Агенство по организации мероприятий</h1><br>
+        <h4>Добро пожаловать! Наша компания предоставляет целый спкетр идей для Вашего праздника!</h4><br>
     </div>
-<#else>
-    <h3>На данный момент мы не предоставляем никаих услуг :(</h3>
-</#list>
-<hr>
-<h4>
-    <a href="/callback">Отправить заявку</a>
-</h4>
-<hr>
-<#if user.email??>
-    <#if user.isAdmin()>
-        <hr>
-        <p>
-            <a href="/create/event">Создать новую event-категорию</a>
-        </p>
-        <hr>
-<#--        <h3>Создать новую event-категорию</h3>-->
-<#--        <form action="/event/create" method="post" enctype="multipart/form-data">-->
-<#--            Название мероприятия: <input required type="text" name="title"><br><br>-->
-<#--            Описание мероприятия: <input required type="text" name="description"><br><br>-->
-<#--&lt;#&ndash;            Цена услуги: <input required type="number" name="price"><br><br>&ndash;&gt;-->
-<#--            Фото мероприятия: <input required type="file" name="file"><br><br>-->
-<#--&lt;#&ndash;            Фото услуги 2: <input type="file" name="file2"><br><br>&ndash;&gt;-->
-<#--&lt;#&ndash;            Фото услуги 3: <input type="file" name="file3"><br><br>&ndash;&gt;-->
-<#--            <input type="hidden" name="_csrf" value="${_csrf.token}">-->
-<#--            <input type="submit" value="Добавить мероприятие">-->
-<#--        </form>-->
+    <hr>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <#list events as event>
+            <div class="col">
+                <div class="card">
+                    <img src="/images/${event.image.id}" class="card-img-top event" alt="...">
+                    <div class="card-body">
+                        <h2 style="text-align: center" class="card-title text-uppercase">${event.title}</h2>
+<#--                        <p class="card-text" style="text-align:justify">${event.description}</p>-->
+                        <div class="d-grid gap-2">
+                            <a href="/event/${event.id}" class="btn btn-outline-info" role="button">Подробнее о
+                                мероприятии...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <#else>
+            <h3 style="text-align: center">На данный момент мы не предоставляем никаих услуг :(</h3>
+        </#list>
+    </div>
+
+    <hr>
+    <div class="d-grid gap-2">
+        <a href="/callback" class="btn btn-outline-dark" role="button">Оставить заявку на консультацию со
+            специалистом</a>
+    </div>
+
+    <#if user.email??>
+        <#if user.isAdmin()>
+            <hr>
+            <div class="d-grid gap-2">
+                <a href="/create/event" class="btn btn-outline-warning" role="button">Создать новую event-категорию</a>
+            </div>
+        </#if>
     </#if>
-</#if>
-</body>
-</html>
+</@t.template>

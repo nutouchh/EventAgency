@@ -44,7 +44,7 @@ public class Event {
     }
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.EAGER,
+            CascadeType.REFRESH, CascadeType.REMOVE},
             mappedBy = "event")
     @JsonIgnore
     private List<Action> actions;

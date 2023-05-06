@@ -1,34 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Услуга: ${action.title}</title>
-</head>
-<body>
-<h1>Услуга: ${action.title}</h1>
-<hr>
+<#import "blocks/template.ftlh" as t>
+<@t.template user>
 
-<#-- фоточки выводит -->
-<#--<#list image as img>-->
-<img src="/images/${image.id}" height="150px"/><br><br>
-<input type="hidden" name="_csrf" value="${_csrf.token}">
-<#--</#list>-->
+<#--    <img src="/images/${image.id}" height="150px"/><br><br>-->
+    <div style="text-align: center">
+        <h1 class="text-uppercase">${action.title}</h1><br>
+        <h4>${action.description}</h4><br>
+        <h3>от ${action.price} рублей</h3><br>
+    </div>
+    <hr>
+    <div class="d-grid gap-2">
+        <a href="/callback" class="btn btn-outline-info" role="button">Оставить заявку на консультацию со специалистом</a>
+    </div>
 
-
-<b>Название услуги:</b> ${action.title}<br>
-<b>Описание услуги:</b> ${action.description}<br>
-<b>Цена услуги:</b> ${action.price}<br>
-<b>Категория:</b> ${action.event.title}<br>
-
-<#if user.email??>
-    <#if user.isAdmin()>
-        <hr>
-        <form action="/action/delete/${action.id}" method="post">
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <input type="submit" value="Удалить услугу">
-        </form>
+    <#if user.email??>
+        <#if user.isAdmin()>
+            <hr>
+            <form action="/action/delete/${action.id}" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <div class="d-grid gap-2">
+                    <input class="btn btn-danger" type="submit" value="Удалить услугу">
+                </div>
+            </form>
+        </#if>
     </#if>
-</#if>
-
-</body>
-</html>
+</@t.template>

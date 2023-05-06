@@ -1,90 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>${event.title}</title>
-</head>
-<body>
-<h1>${event.title}</h1>
-<hr>
+<#import "blocks/template.ftlh" as t>
+<@t.template user>
 
-
-<#if user.email??>
-    <h3>Имя пользователя: <i>${user.name}</i></h3>
-    <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type="submit" value="Выйти"/>
-    </form>
-    <#if user.isAdmin()>
-        <a href="/admin">Панель администратора</a>
-    </#if>
-<#else>
-    <h1><a href="/login">Войти</a></h1>
-</#if>
-<hr>
-
-
-<#-- фоточки выводит -->
-<#--<#list image as img>-->
-<img src="/images/${image.id}" height="150px"/><br><br>
-<input type="hidden" name="_csrf" value="${_csrf.token}">
-<#--</#list>-->
-
-
-<b>Название услуги:</b> ${event.title}<br>
-<b>Описание услуги:</b> ${event.description}<br>
-<#--<b>Цена услуги:</b> ${event.price}<br>-->
-
-<#--<#if user.email??>-->
-<#--    <#if user.isAdmin()>-->
-<#--        <hr>-->
-<#--        <form action="/event/delete/${event.id}" method="post">-->
-<#--            <input type="hidden" name="_csrf" value="${_csrf.token}">-->
-<#--            <input type="submit" value="Удалить услугу">-->
-<#--        </form>-->
-<#--    </#if>-->
-<#--</#if>-->
-
-<hr>
-
-<#list actions as action>
-    <div>
-        <p>
-            <b>${action.title}</b> ${action.price} | <a href="/action/${action.id}">Подробнее...</a>
-        </p>
+<#--    <img src="/images/${image.id}" height="150px"/><br><br>-->
+    <div style="text-align: center">
+        <h1 class="text-uppercase">${event.title}</h1><hr><br>
+        <h4>${event.description}</h4><br>
     </div>
-<#else>
-    <h3>К сожалению, в этой категории пока нет услуг</h3>
-</#list>
+    <hr>
 
-<#if user.email??>
-    <#if user.isAdmin()>
-        <hr>
-        <p>
-            <a href="/create/action">Создать новую услугу</a>
-        </p>
-        <hr>
-    <#-- создание нового товара -->
-<#--        <h3>Создать новую услугу</h3>-->
-<#--        <form action="/action/create" method="post" enctype="multipart/form-data">-->
-<#--            Название услуги: <input required type="text" name="title"><br><br>-->
-<#--            Описание услуги: <input required type="text" name="description"><br><br>-->
-<#--            Цена услуги: <input required type="number" name="price"><br><br>-->
-<#--            Категория мероприятия: <input required type="text" name="eventTitle"><br><br>-->
-<#--            Фото услуги: <input required type="file" name="file"><br><br>-->
-<#--            &lt;#&ndash;            Фото услуги 2: <input type="file" name="file2"><br><br>&ndash;&gt;-->
-<#--            &lt;#&ndash;            Фото услуги 3: <input type="file" name="file3"><br><br>&ndash;&gt;-->
-<#--            <input type="hidden" name="_csrf" value="${_csrf.token}">-->
-<#--            <input type="submit" value="Добавить услугу">-->
-<#--        </form>-->
-        <br>
-        <hr>
-        <form action="/event/delete/${event.id}" method="post">
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <input type="submit" value="Удалить категорию и все соответствующие услуги">
-        </form>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <#list actions as action>
+            <div class="col">
+                <div class="card">
+                    <img src="/images/${action.image.id}" class="card-img-top event" alt="...">
+                    <div class="card-body">
+                        <h2 style="text-align: center" class="card-title text-uppercase">${action.title}</h2>
+                        <h5 class="card-text">от ${action.price} рублей</h5>
+                        <div class="d-grid gap-2">
+                            <a href="/action/${action.id}" class="btn btn-outline-info" role="button">Подробнее об услуге...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <#else>
+            <h3 style="text-align: center">К сожалению, в этой категории пока нет услуг</h3>
+        </#list>
+    </div>
+    <hr>
+    <div class="d-grid gap-2">
+        <a href="/callback" class="btn btn-outline-dark" role="button">Оставить заявку на консультацию со
+            специалистом</a>
+    </div>
+
+    <#if user.email??>
+        <#if user.isAdmin()>
+            <hr>
+            <form action="/event/delete/${event.id}" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <div class="d-grid gap-2">
+                    <input class="btn btn-danger" type="submit" value="Удалить категорию и все соответствующие услуги">
+                </div>
+            </form>
+            <br>
+            <div class="d-grid gap-2">
+                <a href="/create/action" class="btn btn-outline-warning" role="button">Создать новую услугу</a>
+            </div>
+        </#if>
     </#if>
-</#if>
 
-</body>
-</html>
+</@t.template>

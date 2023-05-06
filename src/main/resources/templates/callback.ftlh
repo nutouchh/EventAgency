@@ -1,48 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Успех!</title>
-</head>
-<body>
-<h1>Event Agency</h1>
-<hr>
-
-<#if user.email??>
-    <h3>Имя пользователя: <i>${user.name}</i></h3>
-    <form action="/logout" method="post">
+<#import "blocks/template.ftlh" as t>
+<@t.template user>
+    <h3 style="text-align: center">Заполните форму и скоро с Вами свяжется наш менеджер!</h3>
+    <hr>
+    <form action="/callback/create" method="post" enctype="multipart/form-data">
+        <div class="form-floating mb-3">
+            <input type="text" name="name" class="form-control" id="floatingName" required>
+            <label for="floatingName">Имя</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" name="email" class="form-control" id="floatingEm" required>
+            <label for="floatingEm">Email</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" name="phone" class="form-control" id="floatingPh" required>
+            <label for="floatingPh">Телефон</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" name="comment" class="form-control" id="floatingCom" required>
+            <label for="floatingCom">Комментарий</label>
+        </div>
+        <br>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type="submit" value="Выйти"/>
+        <div class="mb-3">
+            <button class="btn btn-outline-info" type="submit">Отправить</button>
+        </div>
     </form>
-    <#if user.isAdmin()>
-        <a href="/admin">Панель администратора</a>
-    </#if>
-<#else>
-    <h1><a href="/login">Войти</a></h1>
-</#if>
-<hr>
-<#--<h3>Добро пожаловать в личный кабинет, господин администратор!</h3>-->
-<hr>
-<h3>Заполните форму и скоро с Вами свяжется наш менеджер!</h3>
-<hr>
-
-<form action="/callback/create" method="post" enctype="multipart/form-data">
-    <#--    <div class="form-floating">-->
-    <input class="form-control" type="text" name="name" placeholder="Имя" required>
-    <#--    </div>-->
-    <#--    <div class="form-floating">-->
-    <input class="form-control" type="text" name="email" placeholder="Почта" required>
-    <#--    </div>-->
-    <#--    <div class="form-floating">-->
-    <input class="form-control" type="text" name="phone" placeholder="Телефон" required>
-    <#--    </div>-->
-    <#--    <div class="form-floating">-->
-    <input class="form-control" type="text" name="comment" placeholder="Комментарий" required>
-    <#--    </div>-->
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <input type="submit" value="Отправить заявку">
-</form>
-
-<hr>
-</body>
-</html>
+</@t.template>

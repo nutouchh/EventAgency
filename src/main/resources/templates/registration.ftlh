@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Event Agency</title>
-</head>
-<body>
-<h1>Event Agency</h1><hr>
+<h1><a href="/">Event Agency</a></h1><hr>
 <h4>Регистрация</h4>
 <form action="/registration" method="post">
     Имя пользователя: <input type="text" name="name"><br><br>
@@ -17,5 +11,3 @@
 <#if errorMessage??>
     <h2 style="color: red">${errorMessage}</h2>
 </#if>
-</body>
-</html>

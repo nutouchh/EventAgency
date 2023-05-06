@@ -43,7 +43,7 @@ public class Action {
 
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH})
+            CascadeType.REFRESH})
 //    @JoinColumn(name = "product_id")
     private Event event;
 }

@@ -1,41 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Успех!</title>
-</head>
-<body>
-<h1>Event Agency</h1>
-<hr>
+<#import "blocks/template.ftlh" as t>
+<@t.template user>
 
-<#if user.email??>
-    <h3>Имя пользователя: <i>${user.name}</i></h3>
-    <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type="submit" value="Выйти"/>
-    </form>
-    <#if user.isAdmin()>
-        <a href="/admin">Панель администратора</a>
-    </#if>
-<#else>
-    <h1><a href="/login">Войти</a></h1>
-</#if>
+    <h2>Объект успешно создан!</h2>
+    <hr>
+    <div class="d-grid gap-2">
+        <a href="/create/action" class="btn btn-outline-info" role="button">Создать новую услугу</a>
+    </div>
+    <hr>
+    <div class="d-grid gap-2">
+        <a href="/create/event" class="btn btn-outline-info" role="button">Создать новую event-категорию</a>
+    </div>
+    <hr>
+    <div class="d-grid gap-2">
+        <a href="/" class="btn btn-outline-info" role="button">Вернуться на главную страницу</a>
+    </div>
 
-<h2>Успех!! (написать что-то такое, что будет подходить под оба ОБЪЕКТА)</h2>
-
-<hr>
-<h4>
-    <a href="/create/action">Создать новую услугу</a>
-</h4>
-<hr>
-<hr>
-<h4>
-    <a href="/create/event">Создать новую event-категорию</a>
-</h4>
-<hr>
-<h4>
-    <a href="/">Вернуться на главную страницу</a>
-</h4>
-<hr>
-</body>
-</html>
+</@t.template>
