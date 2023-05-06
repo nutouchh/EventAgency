@@ -38,7 +38,11 @@
 <#else>
     <h3>На данный момент мы не предоставляем никаих услуг :(</h3>
 </#list>
-
+<hr>
+<h4>
+    <a href="/callback">Отправить заявку</a>
+</h4>
+<hr>
 <#if user.email??>
     <#if user.isAdmin()>
         <hr>
