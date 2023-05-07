@@ -4,12 +4,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/static/css/style.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <title>Event agency</title>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="icon" href="https://drive.google.com/drive/u/0/folders/1a8UV1i3yiDBXtM-HutFS-hjwUb6UJjQP">
+        <link rel="icon" href="https://illustimage.com/photo/12049.png">
     </head>
     <body class=" m-0 border-0 font-monospace" style="font-family: 'Ysabeau', sans-serif;">
     <nav class="navbar bg-info bg-gradient fixed-top">

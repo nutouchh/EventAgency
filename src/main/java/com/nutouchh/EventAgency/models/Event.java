@@ -24,23 +24,18 @@ public class Event {
     private String title;
     @Column(name = "description", columnDefinition = "text")
     private String description;
-
-
-//    @Column(name = "price")
-//    private int price;
-
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "event")
     private Image image;
-//    private Long previewImageId;
     private LocalDateTime dateOfCreated;
+
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();
     }
 
-    public void addImageToEvent(Image image){
+    public void addImageToEvent(Image image) {
         image.setEvent(this);
-        this.image=image;
+        this.image = image;
     }
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,

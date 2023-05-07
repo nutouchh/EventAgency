@@ -1,10 +1,8 @@
 package com.nutouchh.EventAgency.services;
 
 import com.nutouchh.EventAgency.models.Event;
-import com.nutouchh.EventAgency.models.Event;
 import com.nutouchh.EventAgency.models.Image;
 import com.nutouchh.EventAgency.models.User;
-import com.nutouchh.EventAgency.repositories.EventRepository;
 import com.nutouchh.EventAgency.repositories.EventRepository;
 import com.nutouchh.EventAgency.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,17 +21,6 @@ public class EventService {
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
 
-//    public List<Event> getAllEvents() {
-//        log.info("Get all events");
-//        return eventRepository.findAll();
-//    }
-//
-//    public List<Event> getEvents(String title) {
-////        log.info("Get event with title = {}", title);
-////        if (title != null) return eventRepository.findEventByTitle(title);
-////        return null;
-////    }
-
     public List<Event> getEvents(String title) {
         log.info("Get event with title = {}", title);
         if (title != null) return eventRepository.findEventByTitle(title);
@@ -41,32 +28,13 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-//    public void saveEvent(Principal principal, Event event) throws IOException {
-//        log.info("Saving new event {}", event.getTitle());
-////        Event eventFromDb = eventRepository.save(event);
-////        eventFromDb.setPreviewImageId(eventFromDb.getImages().get(0).getId());
-//        eventRepository.save(event);
-//    }
-
-
     public void saveEvent(Principal principal, Event event, MultipartFile file) throws IOException {
-//        event.setUser(getUserByPrincipal(principal));
         Image image;
         if (file.getSize() != 0) {
             image = toImageEntity(file);
             event.addImageToEvent(image);
         }
-//        if (file2.getSize() != 0) {
-//            image2 = toImageEntity(file2);
-//            event.addImageToEvent(image2);
-//        }
-//        if (file3.getSize() != 0) {
-//            image3 = toImageEntity(file3);
-//            event.addImageToEvent(image3);
-//        }
         log.info("Saving new event {}", event.getTitle());
-//        Event eventFromDb = eventRepository.save(event);
-//        eventFromDb.setPreviewImageId(eventFromDb.getImages().get(0).getId());
         eventRepository.save(event);
     }
 

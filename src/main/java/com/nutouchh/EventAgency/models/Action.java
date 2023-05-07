@@ -25,25 +25,13 @@ public class Action {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "action")
     private Image image;
-//    private Long previewImageId;
-//    private LocalDateTime dateOfCreated;
-//    @PrePersist
-//    private void init() {
-//        dateOfCreated = LocalDateTime.now();
-//    }
 
-    public void addImageToAction(Image image){
+    public void addImageToAction(Image image) {
         image.setAction(this);
-        this.image=image;
+        this.image = image;
     }
-
-//    public Long getImageId(){
-//        return image.getId();
-//    }
-
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH})
-//    @JoinColumn(name = "product_id")
     private Event event;
 }
