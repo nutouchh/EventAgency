@@ -1,6 +1,6 @@
-package com.nutouchh.EventAgency.repositories;
+package com.nutouchh.EventAgency.dao.repositories;
 
-import com.nutouchh.EventAgency.models.User;
+import com.nutouchh.EventAgency.dao.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

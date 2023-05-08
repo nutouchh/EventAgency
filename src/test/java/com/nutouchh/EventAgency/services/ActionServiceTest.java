@@ -1,15 +1,11 @@
 package com.nutouchh.EventAgency.services;
 
-import com.nutouchh.EventAgency.models.Action;
-import com.nutouchh.EventAgency.repositories.ActionRepository;
-import com.nutouchh.EventAgency.repositories.EventRepository;
-import com.nutouchh.EventAgency.repositories.UserRepository;
-import com.nutouchh.EventAgency.services.ActionService;
+import com.nutouchh.EventAgency.dao.models.Action;
+import com.nutouchh.EventAgency.dao.repositories.ActionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.slf4j.Logger;
 
 import java.util.Arrays;
 import java.util.List;

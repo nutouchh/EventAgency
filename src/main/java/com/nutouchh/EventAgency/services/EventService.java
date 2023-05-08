@@ -1,10 +1,10 @@
 package com.nutouchh.EventAgency.services;
 
-import com.nutouchh.EventAgency.models.Event;
-import com.nutouchh.EventAgency.models.Image;
-import com.nutouchh.EventAgency.models.User;
-import com.nutouchh.EventAgency.repositories.EventRepository;
-import com.nutouchh.EventAgency.repositories.UserRepository;
+import com.nutouchh.EventAgency.dao.models.Event;
+import com.nutouchh.EventAgency.dao.models.Image;
+import com.nutouchh.EventAgency.dao.models.User;
+import com.nutouchh.EventAgency.dao.repositories.EventRepository;
+import com.nutouchh.EventAgency.dao.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

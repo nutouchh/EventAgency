@@ -1,7 +1,7 @@
 package com.nutouchh.EventAgency.services;
 
-import com.nutouchh.EventAgency.models.User;
-import com.nutouchh.EventAgency.repositories.UserRepository;
+import com.nutouchh.EventAgency.dao.models.User;
+import com.nutouchh.EventAgency.dao.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -31,7 +31,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testCreateUserReturnsTrueWhenNewUserIsCreated() {
+    public void testCreateUserReturnsTrueTest() {
         User user = new User();
         user.setEmail("test@test.com");
         user.setPassword("password");
@@ -43,7 +43,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testCreateUserReturnsFalseWhenUserAlreadyExists() {
+    public void testCreateUserReturnsFalseTest() {
         User user = new User();
         user.setEmail("test@test.com");
         user.setPassword("password");
@@ -54,7 +54,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testGetUserByPrincipalReturnsUserWhenPrincipalIsNotNull() {
+    public void testGetUserByPrincipalTest() {
         User user = new User();
         user.setEmail("test@test.com");
 
@@ -68,7 +68,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testGetUserByPrincipalReturnsEmptyUserWhenPrincipalIsNull() {
+    public void testGetUserByPrincipalEmptyTest() {
         User result = (User) userService.getUserByPrincipal(null);
 
         assertTrue(result.getEmail() == null);

@@ -1,11 +1,11 @@
 package com.nutouchh.EventAgency.services;
 
-import com.nutouchh.EventAgency.models.Action;
-import com.nutouchh.EventAgency.models.Image;
-import com.nutouchh.EventAgency.models.User;
-import com.nutouchh.EventAgency.repositories.ActionRepository;
-import com.nutouchh.EventAgency.repositories.EventRepository;
-import com.nutouchh.EventAgency.repositories.UserRepository;
+import com.nutouchh.EventAgency.dao.models.Action;
+import com.nutouchh.EventAgency.dao.models.Image;
+import com.nutouchh.EventAgency.dao.models.User;
+import com.nutouchh.EventAgency.dao.repositories.ActionRepository;
+import com.nutouchh.EventAgency.dao.repositories.EventRepository;
+import com.nutouchh.EventAgency.dao.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 @Slf4j

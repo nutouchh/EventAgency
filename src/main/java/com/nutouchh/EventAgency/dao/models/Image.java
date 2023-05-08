@@ -1,4 +1,4 @@
-package com.nutouchh.EventAgency.models;
+package com.nutouchh.EventAgency.dao.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

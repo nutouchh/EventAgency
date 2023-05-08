@@ -1,6 +1,6 @@
-package com.nutouchh.EventAgency.models;
+package com.nutouchh.EventAgency.dao.models;
 
-import com.nutouchh.EventAgency.models.enums.Role;
+import com.nutouchh.EventAgency.dao.models.enums.Role;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,7 +1,7 @@
 package com.nutouchh.EventAgency.services;
 
-import com.nutouchh.EventAgency.models.User;
-import com.nutouchh.EventAgency.repositories.UserRepository;
+import com.nutouchh.EventAgency.dao.models.User;
+import com.nutouchh.EventAgency.dao.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

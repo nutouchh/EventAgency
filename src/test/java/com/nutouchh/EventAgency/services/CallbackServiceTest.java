@@ -1,9 +1,8 @@
 package com.nutouchh.EventAgency.services;
 
 
-import com.nutouchh.EventAgency.models.User;
-import com.nutouchh.EventAgency.repositories.UserRepository;
-import com.nutouchh.EventAgency.services.CallbackService;
+import com.nutouchh.EventAgency.dao.models.User;
+import com.nutouchh.EventAgency.dao.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

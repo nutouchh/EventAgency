@@ -1,6 +1,6 @@
-package com.nutouchh.EventAgency.repositories;
+package com.nutouchh.EventAgency.dao.repositories;
 
-import com.nutouchh.EventAgency.models.Action;
+import com.nutouchh.EventAgency.dao.models.Action;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

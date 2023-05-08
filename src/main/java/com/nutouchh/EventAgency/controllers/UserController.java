@@ -1,6 +1,6 @@
 package com.nutouchh.EventAgency.controllers;
 
-import com.nutouchh.EventAgency.models.User;
+import com.nutouchh.EventAgency.dao.models.User;
 import com.nutouchh.EventAgency.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

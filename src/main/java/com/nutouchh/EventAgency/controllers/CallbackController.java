@@ -1,6 +1,6 @@
 package com.nutouchh.EventAgency.controllers;
 
-import com.nutouchh.EventAgency.models.Callback;
+import com.nutouchh.EventAgency.dao.models.Callback;
 import com.nutouchh.EventAgency.services.CallbackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

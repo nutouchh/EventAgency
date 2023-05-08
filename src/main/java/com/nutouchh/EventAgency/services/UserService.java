@@ -1,8 +1,8 @@
 package com.nutouchh.EventAgency.services;
 
-import com.nutouchh.EventAgency.models.User;
-import com.nutouchh.EventAgency.models.enums.Role;
-import com.nutouchh.EventAgency.repositories.UserRepository;
+import com.nutouchh.EventAgency.dao.models.User;
+import com.nutouchh.EventAgency.dao.models.enums.Role;
+import com.nutouchh.EventAgency.dao.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

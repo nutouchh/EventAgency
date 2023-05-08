@@ -1,6 +1,6 @@
 package com.nutouchh.EventAgency.controllers;
 
-import com.nutouchh.EventAgency.models.Event;
+import com.nutouchh.EventAgency.dao.models.Event;
 import com.nutouchh.EventAgency.services.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -44,7 +44,7 @@ public class EventController {
     }
 
     @GetMapping("/create/event")
-    public String createActionPage(Model model, Principal principal) {
+    public String createEventPage(Model model, Principal principal) {
         model.addAttribute("user", eventService.getUserByPrincipal(principal));
         return "create-event";
     }

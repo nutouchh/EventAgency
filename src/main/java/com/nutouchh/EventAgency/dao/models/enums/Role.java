@@ -1,4 +1,4 @@
-package com.nutouchh.EventAgency.models.enums;
+package com.nutouchh.EventAgency.dao.models.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

@@ -1,7 +1,7 @@
 package com.nutouchh.EventAgency.controllers;
 
-import com.nutouchh.EventAgency.models.Image;
-import com.nutouchh.EventAgency.repositories.ImageRepository;
+import com.nutouchh.EventAgency.dao.models.Image;
+import com.nutouchh.EventAgency.dao.repositories.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
