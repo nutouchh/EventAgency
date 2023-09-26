@@ -7,7 +7,6 @@ import com.nutouchh.EventAgency.dao.models.Event;
 import com.nutouchh.EventAgency.dao.repositories.ActionRepository;
 import com.nutouchh.EventAgency.dao.repositories.EventRepository;
 import com.nutouchh.EventAgency.services.ActionService;
-import com.nutouchh.EventAgency.services.CallbackService;
 import com.nutouchh.EventAgency.services.EventService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
