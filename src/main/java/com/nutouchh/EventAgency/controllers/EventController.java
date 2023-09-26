@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,37 +20,32 @@ public class EventController {
     private final EventService eventService;
 
     @GetMapping("/")
-    public String events(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
+    public String events(@RequestParam(name = "title", required = false) String title, Model model) {
         model.addAttribute("events", eventService.getEvents(title));
-        model.addAttribute("user", eventService.getUserByPrincipal(principal));
         return "events";
     }
 
     @GetMapping("/event/{id}")
-    public String eventInfo(@PathVariable Long id, Model model, Principal principal) {
+    public String eventInfo(@PathVariable Long id, Model model) {
         Event event = eventService.getEventById(id);
         model.addAttribute("event", event);
-        model.addAttribute("image", event.getImage());
         model.addAttribute("actions", event.getActions());
-        model.addAttribute("user", eventService.getUserByPrincipal(principal));
         return "event-actions";
     }
 
     @PostMapping("/event/create")
-    public String createEvent(@RequestParam("file") MultipartFile file, Event event, Principal principal) throws IOException {
-        eventService.saveEvent(principal, event, file);
+    public String createEvent(Event event) {
+        eventService.saveEvent(event);
         return "redirect:/create/event/success";
     }
 
     @GetMapping("/create/event")
-    public String createEventPage(Model model, Principal principal) {
-        model.addAttribute("user", eventService.getUserByPrincipal(principal));
+    public String createEventPage() {
         return "create-event";
     }
 
     @GetMapping("/create/event/success")
-    public String success(Model model, Principal principal) {
-        model.addAttribute("user", eventService.getUserByPrincipal(principal));
+    public String success() {
         return "create-success";
     }
 

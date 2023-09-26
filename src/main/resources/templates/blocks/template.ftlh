@@ -1,5 +1,4 @@
-<#macro template user>
-    <!doctype html>
+ <!doctype html>
     <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -23,23 +22,12 @@
     </nav>
     <br><br>
     <div class="container mt-4">
-        <#nested/>
         <br>
-        <#if user.email??>
-            <#if user.isAdmin()>
                 <div class="d-grid gap-2">
                     <a href="/admin" class="btn btn-outline-warning">Панель администратора</a>
                 </div>
-            </#if>
             <hr>
-            <form action="/logout" method="post">
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <input class="btn btn-outline-danger" type="submit" value="Выйти"/>
-            </form>
-        </#if>
     </div>
     <br>
     </body>
     </html>
-
-</#macro>

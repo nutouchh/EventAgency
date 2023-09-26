@@ -1,18 +1,14 @@
 package com.nutouchh.EventAgency.services;
 
 import com.nutouchh.EventAgency.dao.models.Action;
-import com.nutouchh.EventAgency.dao.models.Image;
-import com.nutouchh.EventAgency.dao.models.User;
 import com.nutouchh.EventAgency.dao.repositories.ActionRepository;
 import com.nutouchh.EventAgency.dao.repositories.EventRepository;
-import com.nutouchh.EventAgency.dao.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -21,7 +17,6 @@ import java.util.List;
 public class ActionService {
     private final ActionRepository actionRepository;
     private final EventRepository eventRepository;
-    private final UserRepository userRepository;
 
     public List<Action> getActions(String title) {
         log.info("Get action with title = {}", title);
@@ -30,12 +25,7 @@ public class ActionService {
         return actionRepository.findAll();
     }
 
-    public void saveAction(Principal principal, Action action, MultipartFile file, String eventTitle) throws IOException {
-        Image image;
-        if (file.getSize() != 0) {
-            image = toImageEntity(file);
-            action.addImageToAction(image);
-        }
+    public void saveAction(Action action, String eventTitle){
         log.info("Saving new action {}", action.getTitle());
         if (eventTitle != null) {
             eventRepository.findEventByTitle(eventTitle).forEach(event -> event.addActionToEvent(action));
@@ -44,20 +34,6 @@ public class ActionService {
 
     }
 
-    public Object getUserByPrincipal(Principal principal) {
-        if (principal == null) return new User();
-        return userRepository.findByEmail(principal.getName());
-    }
-
-    private Image toImageEntity(MultipartFile file) throws IOException {
-        Image image = new Image();
-        image.setName(file.getName());
-        image.setOriginalFileName(file.getOriginalFilename());
-        image.setContentType(file.getContentType());
-        image.setSize(file.getSize());
-        image.setBytes(file.getBytes());
-        return image;
-    }
 
     public void deleteAction(Long id) {
         log.info("Delete action with ID = {}", id);

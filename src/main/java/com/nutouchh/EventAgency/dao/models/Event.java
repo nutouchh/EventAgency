@@ -24,19 +24,8 @@ public class Event {
     private String title;
     @Column(name = "description", columnDefinition = "text")
     private String description;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "event")
-    private Image image;
-    private LocalDateTime dateOfCreated;
 
-    @PrePersist
-    private void init() {
-        dateOfCreated = LocalDateTime.now();
-    }
 
-    public void addImageToEvent(Image image) {
-        image.setEvent(this);
-        this.image = image;
-    }
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.REMOVE},

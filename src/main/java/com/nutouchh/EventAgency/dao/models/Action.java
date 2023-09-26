@@ -23,13 +23,6 @@ public class Action {
     @Column(name = "price")
     private int price;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "action")
-    private Image image;
-
-    public void addImageToAction(Image image) {
-        image.setAction(this);
-        this.image = image;
-    }
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH})
